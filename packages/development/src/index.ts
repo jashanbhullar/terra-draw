@@ -57,6 +57,7 @@ import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import Color from "@arcgis/core/Color";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+import { PolygonWithHoles } from "./polygon-1";
 
 // Development Environment configuration
 import { Config, Libraries } from "./config";
@@ -67,15 +68,15 @@ const addModeChangeHandler = (
 ) => {
 	[
 		"select",
-		"point",
-		"linestring",
+		// "point",
+		// "linestring",
 		"polygon",
-		"freehand",
-		"circle",
-		"rectangle",
-		"angled-rectangle",
-		"sector",
-		"sensor",
+		// "freehand",
+		// "circle",
+		// "rectangle",
+		// "angled-rectangle",
+		// "sector",
+		// "sensor",
 	].forEach((mode) => {
 		(document.getElementById(mode) as HTMLButtonElement).addEventListener(
 			"click",
@@ -92,6 +93,13 @@ const addModeChangeHandler = (
 				currentSelected.button.style.color = "#27ccff";
 			},
 		);
+	});
+
+	(
+		document.getElementById("polygonHoles") as HTMLButtonElement
+	).addEventListener("click", () => {
+		const value = draw.addFeatures(PolygonWithHoles.features as any);
+		console.log("sample here", value);
 	});
 
 	(document.getElementById("clear") as HTMLButtonElement).addEventListener(
@@ -389,6 +397,9 @@ const example = {
 			draw.start();
 
 			addModeChangeHandler(draw, currentSelected);
+			map.fitBounds([123.793945, -29.129457, 138.867188, -19.446615], {
+				padding: 20,
+			});
 		});
 
 		this.initialised.push(Libraries.MapLibre);

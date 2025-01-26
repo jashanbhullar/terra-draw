@@ -24,12 +24,12 @@ export function ValidatePolygonFeature(
 		};
 	}
 
-	if (feature.geometry.coordinates.length !== 1) {
-		return {
-			valid: false,
-			reason: ValidationReasonFeatureHasHoles,
-		};
-	}
+	// if (feature.geometry.coordinates.length !== 1) {
+	// 	return {
+	// 		valid: false,
+	// 		reason: ValidationReasonFeatureHasHoles,
+	// 	};
+	// }
 
 	if (feature.geometry.coordinates[0].length < 4) {
 		return {
